@@ -1,0 +1,31 @@
+<div class="container">
+  <br>
+  <br>
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <%= link_to "See All ", cocktails_path %>
+        </li>
+        <li class="nav-item">
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%=  @cocktail.name %></h5>
+
+      <% @cocktail.doses.each do |dose|%>
+      <p class="card-text"><%= dose.description %> per <%= dose.ingredient.name %>
+        <%= link_to "delete", dose_path(dose), method: :delete %></p>
+      <% end %>
+
+      <%= simple_form_for [@cocktail, @dose] do |f| %>
+      <p> <%= f.input :description %> </p>
+      <p> <%= f.association :ingredient %> </p>
+      <p> <%= f.button :submit %> </p>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
